@@ -17,6 +17,19 @@ FocusFlow is an interactive, browser-based productivity dashboard and personal c
 
 ---
 
+## 📸 Screenshots
+
+### 🖥️ Workspace Dashboard
+![FocusFlow Dashboard](screenshots/dashboard.png)
+
+### 🧠 AI Study Planner & Timeline
+![AI Study Planner](screenshots/planner.png)
+
+### 🃏 AI Study Helper (Active Recall Flashcards & Quizzes)
+![AI Study Helper](screenshots/helper_modal.png)
+
+---
+
 ## 🧠 FlowAI: Agent Architecture & Core Concepts
 
 This project showcases the primary concepts taught in the Google & Kaggle AI Agents course:
