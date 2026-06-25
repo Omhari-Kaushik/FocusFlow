@@ -5485,8 +5485,8 @@ body.light-theme .ai-item-action-btn:hover {
 
 /* AI Helper Modal Card */
 .ai-helper-card {
-    max-width: 700px !important;
-    width: 90% !important;
+    width: 700px !important;
+    max-width: 90% !important;
     max-height: 90vh !important;
     display: flex !important;
     flex-direction: column !important;
