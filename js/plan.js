@@ -694,7 +694,7 @@ Follow these constraints:
                 const helperBtn = itemDiv.querySelector('.ai-item-helper-btn');
                 if (helperBtn) {
                     helperBtn.addEventListener('click', () => {
-                        openStudyHelper(plan.subject, block);
+                        openStudyHelper(plan.subject, block, helperBtn);
                     });
                 }
             }
@@ -1131,7 +1131,7 @@ Follow these constraints:
     let quizScore = 0;
     let hasAnsweredQuiz = false;
 
-    function openStudyHelper(subject, block) {
+    function openStudyHelper(subject, block, helperBtn = null) {
         activeBlock = block;
         activeSubject = subject;
 
@@ -1222,8 +1222,15 @@ Follow these constraints:
             tabFlashcards.classList.add('hidden');
             tabQuiz.classList.add('hidden');
 
+            if (helperBtn) {
+                helperBtn.classList.add('loading');
+            }
+
             fetchRecallAids(apiKey, subject, block.title, block.desc)
                 .then(data => {
+                    if (helperBtn) {
+                        helperBtn.classList.remove('loading');
+                    }
                     recallData = data;
                     
                     // Cache in current block
@@ -1252,6 +1259,9 @@ Follow these constraints:
                     startQuiz();
                 })
                 .catch(err => {
+                    if (helperBtn) {
+                        helperBtn.classList.remove('loading');
+                    }
                     console.error("AI Assistant study aid generation failed", err);
                     loadingIndicator.classList.add('hidden');
                     modal.classList.add('hidden');

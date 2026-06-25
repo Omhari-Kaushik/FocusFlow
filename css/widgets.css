@@ -5464,6 +5464,25 @@ body.light-theme .ai-item-action-btn:hover {
     background: rgba(16, 185, 129, 0.08) !important;
 }
 
+.ai-item-action-btn.loading {
+    animation: button-pulse 1s ease-in-out infinite;
+    pointer-events: none;
+    color: var(--accent-purple) !important;
+    border-color: rgba(139, 92, 246, 0.4) !important;
+    background: rgba(139, 92, 246, 0.08) !important;
+}
+
+@keyframes button-pulse {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(0.95);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
 /* AI Helper Modal Card */
 .ai-helper-card {
     max-width: 600px !important;
