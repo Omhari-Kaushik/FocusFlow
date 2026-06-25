@@ -86,7 +86,7 @@ FlowAI is equipped with a schema mapping containing **14 separate custom functio
       <img src="screenshots/analytics.png" alt="Daily & Weekly Analytics" width="600">
     </details>
 
-4.  **AI Study Plan Generator** – Builds structured, hour-by-hour schedules based on cognitive science (alternating focus and rest blocks), smart synchronization with the Pomodoro timer, and automatic generation of active-recall flashcards and practice quizzes.
+4.  **AI Study Plan Generator** – Generates structured, hour-by-hour schedules based on cognitive science (alternating focus and rest blocks). It can seamlessly sync with the Pomodoro timer, and smartly generate active-recall flashcards and interactive quizzes.
     
     <details>
       <summary>📷 View Screenshot</summary>
