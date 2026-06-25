@@ -1188,14 +1188,16 @@ Follow these constraints:
             };
         }
 
-        // Show Modal
-        modal.classList.remove('hidden');
-        if (typeof gsap !== 'undefined') {
-            gsap.killTweensOf([modal, '.ai-helper-card']);
-            gsap.set(modal, { display: 'flex', opacity: 0 });
-            gsap.set('.ai-helper-card', { scale: 0.85, opacity: 0 });
-            gsap.to(modal, { opacity: 1, duration: 0.4, ease: 'power2.out' });
-            gsap.to('.ai-helper-card', { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(1.5)' });
+        // Inner function to trigger the GSAP modal presentation
+        function presentModal() {
+            modal.classList.remove('hidden');
+            if (typeof gsap !== 'undefined') {
+                gsap.killTweensOf([modal, '.ai-helper-card']);
+                gsap.set(modal, { display: 'flex', opacity: 0 });
+                gsap.set('.ai-helper-card', { scale: 0.85, opacity: 0 });
+                gsap.to(modal, { opacity: 1, duration: 0.4, ease: 'power2.out' });
+                gsap.to('.ai-helper-card', { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(1.5)' });
+            }
         }
 
         // Check if data is already cached
@@ -1207,20 +1209,14 @@ Follow these constraints:
             tabBtns[0].click();
             renderFlashcards();
             startQuiz();
+            presentModal();
         } else {
             // Check for API Key
             const apiKey = localStorage.getItem('focusflow-gemini-key');
             if (!apiKey) {
-                modal.classList.add('hidden');
                 showSettingsWarningModal();
                 return;
             }
-
-            // Show Loading
-            loadingIndicator.classList.remove('hidden');
-            tabsNav.classList.add('hidden');
-            tabFlashcards.classList.add('hidden');
-            tabQuiz.classList.add('hidden');
 
             if (helperBtn) {
                 helperBtn.classList.add('loading');
@@ -1257,14 +1253,13 @@ Follow these constraints:
                     tabBtns[0].click();
                     renderFlashcards();
                     startQuiz();
+                    presentModal();
                 })
                 .catch(err => {
                     if (helperBtn) {
                         helperBtn.classList.remove('loading');
                     }
                     console.error("AI Assistant study aid generation failed", err);
-                    loadingIndicator.classList.add('hidden');
-                    modal.classList.add('hidden');
                     showErrorModal(err.message || "Failed to connect to the Gemini API.", 'helper');
                 });
         }
