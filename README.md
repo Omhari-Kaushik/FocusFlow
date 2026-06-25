@@ -110,7 +110,10 @@ FlowAI is equipped with a schema mapping containing **14 separate custom functio
     <details>
       <summary>📷 View Screenshot</summary>
       <br>
-      <img src="screenshots/habits.png" alt="Goal & Habit Trackers" width="600">
+      <p align="center">
+        <img src="screenshots/goals.png" alt="Goal Tracker" width="380" style="margin-right: 10px;">
+        <img src="screenshots/habits.png" alt="Habit Tracker" width="380">
+      </p>
     </details>
 
 7.  **Workspace Calendar** – Aggregates and overlays goal deadlines, study plans, and custom schedule events.
