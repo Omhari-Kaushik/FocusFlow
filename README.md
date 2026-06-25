@@ -11,7 +11,7 @@ FocusFlow is an interactive, browser-based productivity dashboard and personal c
 
 ## 🔗 Project Resources
 
-*   **⚡ Live Dashboard:** [Insert Your Deployed GitHub Pages / Vercel Link Here]
+*   **⚡ Live Dashboard:** [https://omhari-kaushik.github.io/FocusFlow/](https://omhari-kaushik.github.io/FocusFlow/)
 *   **🎥 Demo Video (5 mins):** [Insert Your YouTube Video Link Here]
 *   **📂 Kaggle Writeup:** [Insert Your Kaggle Writeup Link Here]
 
