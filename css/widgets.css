@@ -5487,6 +5487,9 @@ body.light-theme .ai-item-action-btn:hover {
 .ai-helper-card {
     max-width: 600px !important;
     width: 90% !important;
+    max-height: 90vh !important;
+    display: flex !important;
+    flex-direction: column !important;
     padding: 24px !important;
     background: rgba(18, 20, 32, 0.95) !important;
     backdrop-filter: blur(20px);
@@ -5570,6 +5573,9 @@ body.light-theme .helper-tab-btn:hover {
 /* Tab Content Areas */
 .helper-tab-content {
     animation: fadeIn 0.3s ease;
+    overflow-y: auto;
+    flex: 1;
+    padding-right: 6px;
 }
 
 @keyframes fadeIn {
@@ -5656,6 +5662,11 @@ body.light-theme .flashcard-back {
     font-weight: 600;
     color: var(--text-primary);
     line-height: 1.5;
+    overflow-y: auto;
+    max-height: 120px;
+    width: 100%;
+    padding: 0 8px;
+    margin: auto 0;
 }
 
 .flashcard-hint {
