@@ -64,35 +64,67 @@ FlowAI is equipped with a schema mapping containing **14 separate custom functio
 
 1.  **AI Capsule Trigger & Chat** – Relocated to the top-right header actions. It is styled as a sleek, outlines-matched capsule button with a sparkles icon that glows with the signature purple-pink gradient when active.
     
-    ![AI Capsule Trigger & Chat](screenshots/capsule.png)
+    <details>
+      <summary>📷 View Screenshot</summary>
+      <br>
+      <img src="screenshots/capsule.png" alt="AI Capsule Trigger & Chat" width="600">
+    </details>
 
 2.  **Circular Pomodoro Timer** – Pomodoro, Short Break, and Long Break configurations with a circular progress ring, chime alerts, and visual bounce notifications.
     
-    ![Circular Pomodoro Timer](screenshots/timer.png)
+    <details>
+      <summary>📷 View Screenshot</summary>
+      <br>
+      <img src="screenshots/timer.png" alt="Circular Pomodoro Timer" width="600">
+    </details>
 
 3.  **Daily & Weekly Analytics** – Rolling session counters, focus summaries, and a custom SVG weekly bar chart with animated height updates.
     
-    ![Daily & Weekly Analytics](screenshots/analytics.png)
+    <details>
+      <summary>📷 View Screenshot</summary>
+      <br>
+      <img src="screenshots/analytics.png" alt="Daily & Weekly Analytics" width="600">
+    </details>
 
 4.  **AI Study Plan Generator** – Builds structured, hour-by-hour schedules based on cognitive science (alternating focus and rest blocks) with simulated loader status updates.
     
-    ![AI Study Plan Generator](screenshots/planner.png)
+    <details>
+      <summary>📷 View Screenshot</summary>
+      <br>
+      <img src="screenshots/planner.png" alt="AI Study Plan Generator" width="600">
+    </details>
 
 5.  **Focus Music Player** – Pre-packaged local lo-fi tracks, volume sliders, and a spinning vinyl record art piece with realistic motion markers and light sheen reflections.
     
-    ![Focus Music Player](screenshots/music.png)
+    <details>
+      <summary>📷 View Screenshot</summary>
+      <br>
+      <img src="screenshots/music.png" alt="Focus Music Player" width="600">
+    </details>
 
 6.  **Goal & Habit Trackers** – Milestone check-ins, habit streak calendars, and auto-recalculated completion indicators.
     
-    ![Goal & Habit Trackers](screenshots/habits.png)
+    <details>
+      <summary>📷 View Screenshot</summary>
+      <br>
+      <img src="screenshots/habits.png" alt="Goal & Habit Trackers" width="600">
+    </details>
 
 7.  **Workspace Calendar** – Aggregates and overlays goal deadlines, study plans, and custom schedule events.
     
-    ![Workspace Calendar](screenshots/calendar.png)
+    <details>
+      <summary>📷 View Screenshot</summary>
+      <br>
+      <img src="screenshots/calendar.png" alt="Workspace Calendar" width="600">
+    </details>
 
 8.  **Distraction Shield (Chrome Extension)** – Companion Manifest V3 extension that intercepts distracting domains globally and redirects you back to your workspace.
     
-    ![Distraction Shield (Chrome Extension)](screenshots/blocker.png)
+    <details>
+      <summary>📷 View Screenshot</summary>
+      <br>
+      <img src="screenshots/blocker.png" alt="Distraction Shield (Chrome Extension)" width="600">
+    </details>
 
 ---
 
