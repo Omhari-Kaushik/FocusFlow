@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusFlow - Premium Study & Focus Dashboard</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/widgets.css">
+</head>
+<body class="dark-theme">
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="logo-icon">
+                    <i data-lucide="compass" class="brand-icon"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>FocusFlow</h1>
+                    <span>Study & Focus App</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-item active" data-view="dashboard">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#timer" class="nav-item" data-view="timer">
+                    <i data-lucide="timer"></i>
+                    <span>Timer</span>
+                </a>
+                <a href="#tasks" class="nav-item" data-view="tasks">
+                    <i data-lucide="check-square"></i>
+                    <span>Tasks</span>
+                </a>
+                <a href="#analytics" class="nav-item" data-view="analytics">
+                    <i data-lucide="bar-chart-2"></i>
+                    <span>Analytics & Insights</span>
+                </a>
+                <a href="#study-plan" class="nav-item" data-view="study-plan">
+                    <i data-lucide="sparkles"></i>
+                    <span>Study Plan (AI)</span>
+                </a>
+                <a href="#habit-tracker" class="nav-item" data-view="habit-tracker">
+                    <i data-lucide="calendar-check"></i>
+                    <span>Habit Tracker</span>
+                </a>
+                <a href="#goals" class="nav-item" data-view="goals">
+                    <i data-lucide="target"></i>
+                    <span>Goals</span>
+                </a>
+                <a href="#calendar" class="nav-item" data-view="calendar">
+                    <i data-lucide="calendar"></i>
+                    <span>Calendar</span>
+                </a>
+                <a href="#website-blocker" class="nav-item" data-view="website-blocker">
+                    <i data-lucide="shield-alert"></i>
+                    <span>Website Blocker</span>
+                </a>
+                <a href="#music" class="nav-item" data-view="music">
+                    <i data-lucide="music"></i>
+                    <span>Music</span>
+                </a>
+                <a href="#settings" class="nav-item" data-view="settings">
+                    <i data-lucide="settings"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-streak-card">
+                <div class="streak-header">
+                    <span class="streak-label"><i data-lucide="flame" class="streak-fire-icon"></i> Daily Streak</span>
+                </div>
+                <div class="streak-display">
+                    <span class="streak-count">7 Days</span>
+                    <span class="streak-sub">Keep it up! 🔥</span>
+                </div>
+                <div class="streak-progress-bar">
+                    <div class="streak-progress-fill" style="width: 100%;"></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header Row -->
+            <header class="main-header">
+                <div class="greeting-section">
+                    <h2 id="greeting-title">Good Evening, Student! 👋</h2>
+                    <p id="greeting-subtitle">Stay focused and make today productive.</p>
+                </div>
+                <div class="header-actions">
+                    <button class="header-capsule-btn" id="assistant-trigger" title="FlowAI Assistant">
+                        <i data-lucide="sparkles"></i>
+                        <span>FlowAI</span>
+                    </button>
+                    <button class="header-btn" id="header-music-btn" title="Quick Music Play">
+                        <i data-lucide="music-4"></i>
+                    </button>
+                    <button class="header-btn" id="header-calendar-btn" title="Quick Calendar View">
+                        <i data-lucide="calendar-range"></i>
+                    </button>
+                    <div class="theme-toggle-wrapper">
+                        <i data-lucide="sun" class="theme-icon sun-icon"></i>
+                        <label class="theme-switch" for="theme-checkbox">
+                            <input type="checkbox" id="theme-checkbox" />
+                            <span class="slider"></span>
+                        </label>
+                        <i data-lucide="moon" class="theme-icon moon-icon"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Grid View -->
+            <div id="dashboard-view" class="view-panel active">
+                <div class="dashboard-grid">
+                    
+                    <!-- Pomodoro Timer Card -->
+                    <div class="grid-card timer-card col-span-1" id="dashboard-timer-card">
+                        <div class="timer-header">
+                            <div class="timer-title-group">
+                                <i data-lucide="timer" class="timer-title-icon"></i>
+                                <h3>Pomodoro Timer</h3>
+                            </div>
+                            <div class="timer-preset-select">
+                                <select id="timer-preset">
+                                    <option value="pomodoro">Pomodoro (25 min)</option>
+                                    <option value="short-break">Short Break (5 min)</option>
+                                    <option value="long-break">Long Break (15 min)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="timer-display-wrapper">
+                            <svg class="progress-ring" width="220" height="220">
+                                <defs>
+                                    <linearGradient id="timer-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="var(--accent-purple)" />
+                                        <stop offset="100%" stop-color="var(--accent-pink)" />
+                                    </linearGradient>
+                                </defs>
+                                <circle class="progress-ring-track" stroke="var(--border-color-hover)" stroke-width="8" fill="transparent" r="95" cx="110" cy="110" />
+                                <circle class="progress-ring-circle" stroke="url(#timer-gradient)" stroke-width="8" stroke-linecap="round" fill="transparent" r="95" cx="110" cy="110" />
+                            </svg>
+                            <div class="timer-time-container">
+                                <span id="timer-clock">25:00</span>
+                                <span id="timer-label">Focus Time</span>
+                            </div>
+                        </div>
+                        <div class="timer-controls">
+                            <button id="timer-start-btn" class="timer-btn primary">
+                                <i data-lucide="play"></i> <span>Start</span>
+                            </button>
+                            <button id="timer-reset-btn" class="timer-btn secondary">
+                                <i data-lucide="rotate-ccw"></i> <span>Reset</span>
+                            </button>
+                        </div>
+
+                    </div>
+                    <div id="db-timer-anchor" style="display: none;"></div>
+
+                    <!-- My Tasks Card -->
+                    <div class="grid-card tasks-card col-span-1" id="dashboard-tasks-card">
+                        <div class="tasks-header">
+                            <div class="tasks-title-group">
+                                <i data-lucide="check-square" class="tasks-title-icon"></i>
+                                <h3>My Tasks</h3>
+                            </div>
+                            <button id="tasks-add-trigger-btn" class="tasks-add-btn">
+                                <i data-lucide="plus"></i> <span>Add Task</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Collapsible New Task Input Panel -->
+                        <div id="tasks-input-panel" class="tasks-input-panel hidden">
+                            <input type="text" id="tasks-new-input" placeholder="Add a new task..." maxlength="80">
+                            <button id="tasks-save-btn" class="tasks-save-btn" title="Save Task">
+                                <i data-lucide="plus"></i>
+                            </button>
+                        </div>
+
+                        <!-- Tasks Scrollable List Container -->
+                        <div class="tasks-list-container">
+                            <ul id="tasks-list" class="tasks-list">
+                                <!-- Dynamically generated task items -->
+                            </ul>
+                        </div>
+
+                        <!-- Tasks Footer Summary Row -->
+                        <div class="tasks-footer">
+                            <span id="tasks-progress">Completed: 0 / 0</span>
+                            <button id="tasks-clear-btn" class="tasks-clear-btn">Clear Completed</button>
+                        </div>
+                    </div>
+                    <div id="db-tasks-anchor" style="display: none;"></div>
+
+                    <!-- Today's Statistics Card -->
+                    <div class="grid-card stats-card col-span-1" id="dashboard-stats-card">
+                        <div class="stats-header">
+                            <div class="stats-title-group">
+                                <i data-lucide="bar-chart-2" class="stats-title-icon"></i>
+                                <h3>Today's Statistics</h3>
+                            </div>
+                        </div>
+                        <div class="stats-grid">
+                            <!-- Focus Time -->
+                            <div class="stat-box">
+                                <div class="stat-icon-wrapper blue">
+                                    <i data-lucide="clock"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="stat-focus-time">0 min</span>
+                                    <span class="stat-label">Total Focus Time</span>
+                                </div>
+                            </div>
+                            <!-- Sessions Completed -->
+                            <div class="stat-box">
+                                <div class="stat-icon-wrapper green">
+                                    <i data-lucide="check-circle-2"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="stat-sessions">0</span>
+                                    <span class="stat-label">Sessions Completed</span>
+                                </div>
+                            </div>
+                            <!-- Day Streak -->
+                            <div class="stat-box">
+                                <div class="stat-icon-wrapper orange">
+                                    <i data-lucide="flame"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="stat-streak">0</span>
+                                    <span class="stat-label">Day Streak</span>
+                                </div>
+                            </div>
+                            <!-- Tasks Completed -->
+                            <div class="stat-box">
+                                <div class="stat-icon-wrapper purple">
+                                    <i data-lucide="target"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="stat-tasks">0</span>
+                                    <span class="stat-label">Tasks Completed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="db-stats-anchor" style="display: none;"></div>
+
+                    <!-- AI Study Plan Card -->
+                    <div class="grid-card ai-plan-card col-span-2" id="dashboard-ai-plan-card">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <i data-lucide="sparkles" class="card-title-icon"></i>
+                                <h3>AI Study Plan</h3>
+                            </div>
+                        </div>
+                        <div class="ai-plan-container">
+                            <!-- Input Form Panel -->
+                            <div id="ai-input-panel" class="ai-input-panel">
+                                <p class="ai-panel-subtitle">Input your topic and study goals to generate a cognitive science-backed hourly schedule.</p>
+                                <div class="ai-form-group">
+                                    <div class="ai-field">
+                                        <label for="ai-subject-input">Study Topic</label>
+                                        <input type="text" id="ai-subject-input" placeholder="e.g. Calculus Derivatives, Quantum Physics, JS Closures..." maxlength="60">
+                                    </div>
+                                    <div class="ai-field-row">
+                                        <div class="ai-field">
+                                            <label for="ai-time-select">Duration</label>
+                                            <select id="ai-time-select">
+                                                <option value="1">1 Hour</option>
+                                                <option value="2" selected>2 Hours</option>
+                                                <option value="3">3 Hours</option>
+                                                <option value="4">4 Hours</option>
+                                            </select>
+                                        </div>
+                                        <div class="ai-field">
+                                            <label for="ai-goal-select">Focus Goal</label>
+                                            <select id="ai-goal-select">
+                                                <option value="concepts">Learn Core Concepts</option>
+                                                <option value="practice">Practice Exercises</option>
+                                                <option value="notes">Summarize Notes</option>
+                                                <option value="exam">Exam Preparation</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button id="ai-generate-btn" class="ai-primary-btn">
+                                    <i data-lucide="cpu"></i> Generate Plan
+                                </button>
+                            </div>
+
+                            <!-- AI Compilation Loading State -->
+                            <div id="ai-loading-panel" class="ai-loading-panel hidden">
+                                <div class="ai-loading-spinner-wrapper">
+                                    <div class="loading-spinner"></div>
+                                    <div class="pulse-ring"></div>
+                                </div>
+                                <span id="ai-loading-status" class="ai-loading-status">Analyzing study topic...</span>
+                                <div class="ai-loading-progress-bar">
+                                    <div class="ai-loading-progress-fill" id="ai-loading-fill"></div>
+                                </div>
+                                <p class="ai-loading-tip" id="ai-loading-tip">Tip: Spacing study blocks with short breaks increases retention by up to 20%.</p>
+                            </div>
+
+                            <!-- Generated Plan Output Panel -->
+                            <div id="ai-output-panel" class="ai-output-panel hidden">
+                                <div class="ai-output-header">
+                                    <div class="ai-output-meta">
+                                        <h4 id="ai-output-title">Organic Chemistry</h4>
+                                        <span id="ai-output-subtitle">2 Hours • Exam Preparation</span>
+                                    </div>
+                                    <button id="ai-reset-btn" class="ai-secondary-btn" title="Create New Plan">
+                                        <i data-lucide="refresh-cw"></i> New Plan
+                                    </button>
+                                </div>
+                                
+                                <div class="ai-progress-tracker">
+                                    <div class="ai-progress-text">
+                                        <span>Plan Completion</span>
+                                        <span id="ai-plan-progress-percent">0%</span>
+                                    </div>
+                                    <div class="ai-progress-bar-container">
+                                        <div class="ai-progress-fill" id="ai-plan-progress-fill"></div>
+                                    </div>
+                                </div>
+
+                                <div class="ai-timeline-scroll">
+                                    <div class="ai-timeline" id="ai-timeline-list">
+                                        <!-- Generated Timeline Blocks go here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="db-ai-plan-anchor" style="display: none;"></div>
+
+                    <!-- Weekly Focus Analytics Card -->
+                    <div class="grid-card analytics-card col-span-1" id="dashboard-analytics-card">
+                        <div class="analytics-header">
+                            <div class="analytics-title-group">
+                                <i data-lucide="trending-up" class="analytics-title-icon"></i>
+                                <h3>Weekly Focus</h3>
+                            </div>
+                            <div class="analytics-preset-select">
+                                <select id="analytics-week-select">
+                                    <option value="this-week">This Week</option>
+                                    <option value="last-week">Last Week</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <!-- Custom SVG Bar Chart -->
+                            <svg class="focus-chart" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid meet">
+                                <defs>
+                                    <linearGradient id="chart-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" stop-color="var(--accent-purple)" />
+                                        <stop offset="100%" stop-color="var(--accent-pink)" />
+                                    </linearGradient>
+                                </defs>
+                                <!-- Grid Lines -->
+                                <line class="chart-grid-line" x1="35" y1="20" x2="310" y2="20" />
+                                <line class="chart-grid-line" x1="35" y1="50" x2="310" y2="50" />
+                                <line class="chart-grid-line" x1="35" y1="80" x2="310" y2="80" />
+                                <line class="chart-grid-line" x1="35" y1="110" x2="310" y2="110" />
+                                <line class="chart-grid-line" x1="35" y1="140" x2="310" y2="140" />
+                                
+                                <!-- Y-Axis Labels (Left) -->
+                                <text class="chart-axis-label" x="22" y="24">120</text>
+                                <text class="chart-axis-label" x="22" y="54">90</text>
+                                <text class="chart-axis-label" x="22" y="84">60</text>
+                                <text class="chart-axis-label" x="22" y="114">30</text>
+                                <text class="chart-axis-label" x="22" y="144">0</text>
+                                
+                                <!-- SVG Bars (heights will be updated by GSAP) -->
+                                <!-- Mon -->
+                                <g class="chart-bar-group">
+                                    <rect class="chart-bar" x="46" y="140" width="16" height="0" rx="4" ry="4" fill="url(#chart-gradient)" />
+                                    <text class="chart-bar-value" x="54" y="135">0</text>
+                                    <text class="chart-bar-label" x="54" y="158">Mon</text>
+                                </g>
+                                <!-- Tue -->
+                                <g class="chart-bar-group">
+                                    <rect class="chart-bar" x="84" y="140" width="16" height="0" rx="4" ry="4" fill="url(#chart-gradient)" />
+                                    <text class="chart-bar-value" x="92" y="135">0</text>
+                                    <text class="chart-bar-label" x="92" y="158">Tue</text>
+                                </g>
+                                <!-- Wed -->
+                                <g class="chart-bar-group">
+                                    <rect class="chart-bar" x="122" y="140" width="16" height="0" rx="4" ry="4" fill="url(#chart-gradient)" />
+                                    <text class="chart-bar-value" x="130" y="135">0</text>
+                                    <text class="chart-bar-label" x="130" y="158">Wed</text>
+                                </g>
+                                <!-- Thu -->
+                                <g class="chart-bar-group">
+                                    <rect class="chart-bar" x="160" y="140" width="16" height="0" rx="4" ry="4" fill="url(#chart-gradient)" />
+                                    <text class="chart-bar-value" x="168" y="135">0</text>
+                                    <text class="chart-bar-label" x="168" y="158">Thu</text>
+                                </g>
+                                <!-- Fri -->
+                                <g class="chart-bar-group">
+                                    <rect class="chart-bar" x="198" y="140" width="16" height="0" rx="4" ry="4" fill="url(#chart-gradient)" />
+                                    <text class="chart-bar-value" x="206" y="135">0</text>
+                                    <text class="chart-bar-label" x="206" y="158">Fri</text>
+                                </g>
+                                <!-- Sat -->
+                                <g class="chart-bar-group">
+                                    <rect class="chart-bar" x="236" y="140" width="16" height="0" rx="4" ry="4" fill="url(#chart-gradient)" />
+                                    <text class="chart-bar-value" x="244" y="135">0</text>
+                                    <text class="chart-bar-label" x="244" y="158">Sat</text>
+                                </g>
+                                <!-- Sun -->
+                                <g class="chart-bar-group">
+                                    <rect class="chart-bar" x="274" y="140" width="16" height="0" rx="4" ry="4" fill="url(#chart-gradient)" />
+                                    <text class="chart-bar-value" x="282" y="135">0</text>
+                                    <text class="chart-bar-label" x="282" y="158">Sun</text>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="analytics-footer">
+                            <span>Total: <strong id="chart-total-minutes">0 min</strong></span>
+                        </div>
+                    </div>
+                    <div id="db-analytics-anchor" style="display: none;"></div>
+
+                    <!-- Goals Card Summary -->
+                    <div class="grid-card goals-card col-span-1">
+                        <div class="goals-summary-header">
+                            <div class="goals-summary-title-group">
+                                <i data-lucide="target" class="goals-summary-title-icon"></i>
+                                <h3>Goals Progress</h3>
+                            </div>
+                            <button id="goals-dashboard-manage-btn" class="goals-manage-btn" title="Manage Goals">
+                                <i data-lucide="external-link"></i>
+                            </button>
+                        </div>
+                        <div class="goals-summary-content">
+                            <div class="goals-summary-stats">
+                                <div class="goal-stat-item">
+                                    <span class="goal-stat-val" id="goals-summary-completed-count">0/0</span>
+                                    <span class="goal-stat-lbl">Goals Met</span>
+                                </div>
+                                <div class="goals-summary-progress-ring-wrapper">
+                                    <div class="goals-overall-pct" id="goals-overall-pct-label">0%</div>
+                                    <svg class="goals-summary-progress-ring" width="60" height="60">
+                                        <circle class="goals-ring-track" stroke="var(--border-color-hover)" stroke-width="4" fill="transparent" r="24" cx="30" cy="30" />
+                                        <circle class="goals-ring-circle" stroke="var(--accent-purple)" stroke-width="4" stroke-linecap="round" fill="transparent" r="24" cx="30" cy="30" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="goals-summary-list" id="goals-summary-list">
+                                <!-- Dynamically populated top 2 active goals -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Habit Tracker Card Summary -->
+                    <div class="grid-card habits-card col-span-1" id="dashboard-habits-card">
+                        <div class="habits-summary-header">
+                            <div class="habits-summary-title-group">
+                                <i data-lucide="calendar-check" class="habits-summary-title-icon"></i>
+                                <h3>Today's Habits</h3>
+                            </div>
+                            <button id="habits-dashboard-manage-btn" class="habits-manage-btn" title="Manage Habits">
+                                <i data-lucide="external-link"></i>
+                            </button>
+                        </div>
+                        <div class="habits-summary-content">
+                            <div class="habits-summary-progress">
+                                <span id="habits-summary-pct">0% Completed</span>
+                                <div class="habits-summary-bar">
+                                    <div class="habits-summary-fill" id="habits-summary-fill"></div>
+                                </div>
+                            </div>
+                            <ul class="habits-summary-list" id="habits-summary-list">
+                                <!-- Dynamically populated list of today's habits with quick checkboxes -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Motivational Quote Card -->
+                    <div class="grid-card quotes-card col-span-1">
+                        <div class="quotes-header">
+                            <div class="quotes-title-group">
+                                <i data-lucide="quote" class="quotes-title-icon"></i>
+                                <h3>Daily Motivation</h3>
+                            </div>
+                            <button id="quotes-refresh-btn" class="quotes-refresh-btn" title="New Quote">
+                                <i data-lucide="refresh-cw"></i>
+                            </button>
+                        </div>
+                        <div class="quotes-content">
+                            <p id="quote-text" class="quote-text">"The only way to do great work is to love what you do."</p>
+                            <span id="quote-author" class="quote-author">— Steve Jobs</span>
+                        </div>
+                    </div>
+
+                    <!-- Focus Music Card -->
+                    <div class="grid-card music-card col-span-3" id="dashboard-music-card">
+                        <div class="music-header">
+                            <div class="music-title-group">
+                                <i data-lucide="music" class="music-title-icon"></i>
+                                <h3>Focus Music</h3>
+                            </div>
+                        </div>
+                        <div class="music-player-container">
+                            <!-- Vinyl Record Cover -->
+                            <div class="vinyl-container">
+                                <div class="vinyl-grooves" id="music-vinyl">
+                                    <div class="vinyl-center">
+                                        <!-- Mini Cover Art -->
+                                        <div class="vinyl-cover"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Track Metadata -->
+                            <div class="track-details">
+                                 <h4 id="music-track-title">Bell-Fi Broadcasts</h4>
+                                 <span id="music-track-artist">Pro Lofi</span>
+                            </div>
+
+                            <!-- Progress Seek Bar -->
+                            <div class="music-progress-wrapper">
+                                <span class="music-time-lbl" id="music-time-elapsed">0:00</span>
+                                <div class="music-progress-bar" id="music-progress-container">
+                                    <div class="music-progress-fill" id="music-progress-fill"></div>
+                                </div>
+                                <span class="music-time-lbl" id="music-time-duration">-:--</span>
+                            </div>
+
+                            <!-- Music Action Buttons -->
+                            <div class="music-controls">
+                                <!-- Spacer to balance volume button and center play controls -->
+                                <div class="music-controls-spacer"></div>
+                                <button id="music-prev-btn" class="music-ctrl-btn" title="Previous Track">
+                                    <i data-lucide="skip-back"></i>
+                                </button>
+                                <button id="music-play-btn" class="music-play-toggle-btn" title="Play / Pause">
+                                    <i data-lucide="play"></i>
+                                </button>
+                                <button id="music-next-btn" class="music-ctrl-btn" title="Next Track">
+                                    <i data-lucide="skip-forward"></i>
+                                </button>
+                                <div class="music-volume-wrapper">
+                                    <button id="music-vol-btn" class="music-ctrl-btn" title="Volume">
+                                        <i data-lucide="volume-2"></i>
+                                    </button>
+                                    <div class="volume-slider-panel">
+                                        <input type="range" id="music-vol-slider" min="0" max="100" value="50">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="db-music-anchor" style="display: none;"></div>
+
+                    <!-- Distraction Shield Dashboard Card -->
+                    <div class="grid-card blocker-card col-span-3" id="dashboard-blocker-card">
+                        <div class="blocker-card-header">
+                            <div class="blocker-title-group">
+                                <i data-lucide="shield" class="blocker-title-icon"></i>
+                                <h3>Distraction Shield (<span id="db-blocker-count">0</span>)</h3>
+                            </div>
+                            <div class="blocker-header-actions">
+                                <span class="blocker-status-badge inactive" id="db-blocker-status">Inactive</span>
+                                <label class="blocker-switch">
+                                    <input type="checkbox" id="db-blocker-toggle">
+                                    <span class="blocker-slider"></span>
+                                </label>
+                                <button id="blocker-dashboard-manage-btn" class="blocker-manage-btn" title="Manage Shield" style="margin-left: 2px;">
+                                    <i data-lucide="external-link"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Mini Scrollable Blocked Sites List -->
+                        <div class="db-blocker-content">
+                            <ul id="db-blocked-sites-list" class="db-blocked-sites-list">
+                                <!-- Loaded dynamically -->
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Dynamic Views for other tabs (placeholder sections that switch when navigating) -->
+            <div id="timer-view" class="view-panel">
+                <div class="workspace-wrapper">
+                    <div class="workspace-title-section">
+                        <h2>Dedicated Focus Timer</h2>
+                        <p>Eliminate distractions and focus on your work.</p>
+                    </div>
+                    <div class="workspace-grid">
+                        <div class="workspace-content" id="timer-workspace-content">
+                            <!-- Relocated timer card will go here -->
+                        </div>
+                        <div class="grid-card timer-history-card">
+                            <div class="card-header">
+                                <div class="card-title-group">
+                                    <i data-lucide="history" class="card-title-icon"></i>
+                                    <h3>Focus Session Log</h3>
+                                </div>
+                            </div>
+                            <div class="timer-history-container">
+                                <ul id="timer-history-list" class="timer-history-list">
+                                    <!-- Loaded dynamically -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tasks-view" class="view-panel">
+                <div class="workspace-wrapper centered-workspace">
+                    <div class="workspace-title-section">
+                        <h2>My Study Tasks</h2>
+                        <p>Organize, track, and complete your learning milestones.</p>
+                    </div>
+                    <div class="workspace-content" id="tasks-workspace-content">
+                        <!-- relocated tasks card goes here -->
+                    </div>
+                </div>
+            </div>
+            <div id="study-plan-view" class="view-panel">
+                <div class="workspace-wrapper centered-workspace">
+                    <div class="workspace-title-section">
+                        <h2>AI Study Plan Generator</h2>
+                        <p>Structure your learning sessions using cognitive science-backed schedules.</p>
+                    </div>
+                    <div class="workspace-content" id="study-plan-workspace-content">
+                        <!-- relocated ai-plan-card goes here -->
+                    </div>
+                </div>
+            </div>
+            <!-- Habit Tracker View Workspace -->
+            <div id="habit-tracker-view" class="view-panel">
+                <div class="habits-layout">
+                    <!-- Left Panel: Create Habit Form -->
+                    <div class="habits-form-card grid-card">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <i data-lucide="calendar-check" class="card-title-icon"></i>
+                                <h3>Create New Habit</h3>
+                            </div>
+                        </div>
+                        <div class="habits-form-container">
+                            <div class="habits-field">
+                                <label for="habit-title-input">Habit Title</label>
+                                <input type="text" id="habit-title-input" placeholder="e.g. Drink 3L water, Read 15 pages, Meditate" maxlength="60">
+                            </div>
+                            <div class="habits-field">
+                                <label for="habit-category-select">Category</label>
+                                <select id="habit-category-select">
+                                    <option value="Health">Health & Wellness</option>
+                                    <option value="Academic">Academic</option>
+                                    <option value="Skill">Skill Development</option>
+                                    <option value="Personal">Personal Growth</option>
+                                </select>
+                            </div>
+                            <button id="habit-submit-btn" class="habits-primary-btn">
+                                <i data-lucide="plus-circle"></i> Save Habit
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: Habits Cards List -->
+                    <div class="habits-list-section">
+                        <div class="habits-list-header">
+                            <h3>My Habits (<span id="habits-count">0</span>)</h3>
+                        </div>
+                        
+                        <div id="habits-container" class="habits-container">
+                            <!-- Loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Goals View Workspace -->
+            <div id="goals-view" class="view-panel">
+                <div class="goals-layout">
+                    <!-- Left Panel: Create Goal Form -->
+                    <div class="goals-form-card grid-card">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <i data-lucide="target" class="card-title-icon"></i>
+                                <h3>Create New Goal</h3>
+                            </div>
+                        </div>
+                        <div class="goals-form-container">
+                            <div class="goals-field">
+                                <label for="goal-title-input">Goal Title</label>
+                                <input type="text" id="goal-title-input" placeholder="e.g. Master SQL Joins, Finish portfolio website" maxlength="80">
+                            </div>
+                            <div class="goals-field-row">
+                                <div class="goals-field">
+                                    <label for="goal-category-select">Category</label>
+                                    <select id="goal-category-select">
+                                        <option value="Academic">Academic</option>
+                                        <option value="Skill">Skill Development</option>
+                                        <option value="Personal">Personal Growth</option>
+                                        <option value="Health">Health & Wellness</option>
+                                    </select>
+                                </div>
+                                <div class="goals-field">
+                                    <label for="goal-deadline-input">Target Deadline</label>
+                                    <input type="date" id="goal-deadline-input">
+                                </div>
+                            </div>
+                            
+                            <!-- Milestone Builder -->
+                            <div class="goals-field">
+                                <label>Milestones / Steps</label>
+                                <div class="milestone-input-wrapper">
+                                    <input type="text" id="goal-milestone-input" placeholder="Add a milestone step..." maxlength="80">
+                                    <button type="button" id="goal-add-milestone-btn" class="milestone-add-btn">
+                                        <i data-lucide="plus"></i>
+                                    </button>
+                                </div>
+                                <ul id="goals-milestones-preview" class="milestones-preview-list">
+                                    <!-- Temporary preview list before saving goal -->
+                                </ul>
+                            </div>
+
+                            <button id="goal-submit-btn" class="goals-primary-btn">
+                                <i data-lucide="plus-circle"></i> Save Goal
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: Active & Completed Goals List -->
+                    <div class="goals-list-section">
+                        <div class="goals-list-header">
+                            <h3>Active Goals (<span id="goals-active-count">0</span>)</h3>
+                            <div class="goals-filter-wrapper">
+                                <button class="goals-filter-btn active" data-filter="all">All</button>
+                                <button class="goals-filter-btn" data-filter="active">In Progress</button>
+                                <button class="goals-filter-btn" data-filter="completed">Completed</button>
+                            </div>
+                        </div>
+                        
+                        <div id="goals-cards-container" class="goals-cards-container">
+                            <!-- Loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="analytics-view" class="view-panel">
+                <div class="workspace-wrapper">
+                    <div class="workspace-title-section">
+                        <h2>Analytics & Insights</h2>
+                        <p>Track your daily focus stats, weekly study patterns, and personalized coaching recommendations.</p>
+                    </div>
+                    <div class="workspace-grid">
+                        <div class="workspace-content" id="stats-workspace-content">
+                            <!-- Relocated Today's Stats card will go here -->
+                        </div>
+                        <div class="workspace-content" id="analytics-workspace-content">
+                            <!-- Relocated Weekly Chart card will go here -->
+                        </div>
+                        <div class="grid-card analytics-insights-card">
+                            <div class="card-header">
+                                <div class="card-title-group">
+                                    <i data-lucide="sparkles" class="card-title-icon"></i>
+                                    <h3>Smart Insights</h3>
+                                </div>
+                            </div>
+                            <div class="analytics-insights-container">
+                                <div class="insights-left-col">
+                                    <div class="analytics-insights-stats">
+                                        <div class="insight-stat-box">
+                                            <span class="insight-stat-value" id="insights-weekly-total">0h 0m</span>
+                                            <span class="insight-stat-label">Weekly Total</span>
+                                        </div>
+                                        <div class="insight-stat-box">
+                                            <span class="insight-stat-value" id="insights-daily-avg">0m</span>
+                                            <span class="insight-stat-label">Daily Average</span>
+                                        </div>
+                                        <div class="insight-stat-box">
+                                            <span class="insight-stat-value" id="insights-productive-day">None</span>
+                                            <span class="insight-stat-label">Peak Focus Day</span>
+                                        </div>
+                                    </div>
+                                    <div class="analytics-trend-row">
+                                        <span class="analytics-trend-lbl">Weekly Trend:</span>
+                                        <span id="insights-trend-badge" class="trend-badge neutral">No Data</span>
+                                    </div>
+                                    <div class="analytics-distribution-box">
+                                        <div class="analytics-coach-header">
+                                            <i data-lucide="clock" class="coach-icon"></i>
+                                            <span>Peak Study Periods</span>
+                                        </div>
+                                        <div class="distribution-bars-grid">
+                                            <div class="dist-row">
+                                                <div class="dist-label-group">
+                                                    <span class="dist-period-name">Morning (6 AM - 12 PM)</span>
+                                                    <span class="dist-period-value" id="dist-val-morning">45m</span>
+                                                </div>
+                                                <div class="dist-progress-track">
+                                                    <div class="dist-progress-bar morning" id="dist-bar-morning" style="width: 10%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="dist-row">
+                                                <div class="dist-label-group">
+                                                    <span class="dist-period-name">Afternoon (12 PM - 6 PM)</span>
+                                                    <span class="dist-period-value" id="dist-val-afternoon">120m</span>
+                                                </div>
+                                                <div class="dist-progress-track">
+                                                    <div class="dist-progress-bar afternoon" id="dist-bar-afternoon" style="width: 25%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="dist-row">
+                                                <div class="dist-label-group">
+                                                    <span class="dist-period-name">Evening (6 PM - 12 AM)</span>
+                                                    <span class="dist-period-value" id="dist-val-evening">240m</span>
+                                                </div>
+                                                <div class="dist-progress-track">
+                                                    <div class="dist-progress-bar evening" id="dist-bar-evening" style="width: 50%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="dist-row">
+                                                <div class="dist-label-group">
+                                                    <span class="dist-period-name">Night (12 AM - 6 AM)</span>
+                                                    <span class="dist-period-value" id="dist-val-night">75m</span>
+                                                </div>
+                                                <div class="dist-progress-track">
+                                                    <div class="dist-progress-bar night" id="dist-bar-night" style="width: 15%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="insights-right-col">
+                                    <div class="analytics-coach-box">
+                                        <div class="analytics-coach-header">
+                                            <i data-lucide="compass" class="coach-icon"></i>
+                                            <span>FlowAI Smart Coach</span>
+                                        </div>
+                                        <p id="insights-coach-tip" class="analytics-coach-tip">
+                                            No stats logged for this week yet. Start your first Pomodoro timer session to get personalized coaching recommendations!
+                                        </p>
+                                    </div>
+                                    <div class="analytics-balance-box">
+                                        <div class="analytics-coach-header">
+                                            <i data-lucide="scale" class="coach-icon"></i>
+                                            <span>Work-Break Balance</span>
+                                        </div>
+                                        <div class="balance-stats">
+                                            <div class="balance-item focus">
+                                                <span class="balance-dot focus-dot"></span>
+                                                <span class="balance-lbl">Focus:</span>
+                                                <span class="balance-val" id="balance-focus-val">83%</span>
+                                            </div>
+                                            <div class="balance-item break">
+                                                <span class="balance-dot break-dot"></span>
+                                                <span class="balance-lbl">Breaks:</span>
+                                                <span class="balance-val" id="balance-break-val">17%</span>
+                                            </div>
+                                        </div>
+                                        <div class="balance-progress-container">
+                                            <div class="balance-progress-track">
+                                                <div class="balance-bar focus-bar" id="balance-focus-bar" style="width: 83%"></div>
+                                                <div class="balance-bar break-bar" id="balance-break-bar" style="width: 17%"></div>
+                                            </div>
+                                        </div>
+                                        <p class="balance-feedback" id="balance-feedback-text">
+                                            Optimal balance! You're taking regular breaks to sustain high focus levels and prevent cognitive fatigue.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="calendar-view" class="view-panel">
+                <div class="calendar-layout">
+                    <!-- Left Panel: Selected Day Details & Legend -->
+                    <div class="calendar-sidebar grid-card">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <i data-lucide="calendar-days" class="card-title-icon"></i>
+                                <h3 id="selected-day-label">Selected Day</h3>
+                            </div>
+                        </div>
+                        
+                        <!-- Events List for Selected Day -->
+                        <div class="selected-day-events-container">
+                            <div id="selected-day-events-list" class="calendar-events-list">
+                                <!-- Loaded dynamically -->
+                            </div>
+                            <button id="calendar-add-event-btn" class="calendar-primary-btn">
+                                <i data-lucide="plus-circle"></i> Add Custom Event
+                            </button>
+                        </div>
+
+                        <!-- Calendar Legend -->
+                        <div class="calendar-legend-card">
+                            <h4>Activity Legend</h4>
+                            <ul class="calendar-legend-list">
+                                <li><span class="legend-dot goal-dot"></span> Goal Deadlines</li>
+                                <li><span class="legend-dot plan-dot"></span> AI Study Plans</li>
+                                <li><span class="legend-dot custom-dot"></span> Custom Reminders</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: Calendar Month Grid -->
+                    <div class="calendar-main-card grid-card">
+                        <div class="calendar-header-bar">
+                            <div class="calendar-month-year" id="calendar-month-year-label">June 2026</div>
+                            <div class="calendar-nav-controls">
+                                <button id="calendar-prev-month" class="calendar-nav-btn" title="Previous Month">
+                                    <i data-lucide="chevron-left"></i>
+                                </button>
+                                <button id="calendar-today-btn" class="calendar-nav-btn today-btn">Today</button>
+                                <button id="calendar-next-month" class="calendar-nav-btn" title="Next Month">
+                                    <i data-lucide="chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Calendar Monthly Grid -->
+                        <div class="calendar-grid-container">
+                            <!-- Weekdays Header Row -->
+                            <div class="calendar-weekdays-header">
+                                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                            </div>
+                            <!-- Grid Cells (35 or 42 cells) -->
+                            <div id="calendar-days-grid" class="calendar-days-grid">
+                                <!-- Loaded dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Website Blocker View Workspace -->
+            <div id="website-blocker-view" class="view-panel">
+                <div class="blocker-layout">
+                    <!-- Left Panel: Configure Blocker Form -->
+                    <div class="blocker-form-card grid-card">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <i data-lucide="shield-alert" class="card-title-icon"></i>
+                                <h3>Configure Blocker</h3>
+                            </div>
+                        </div>
+                        <div class="blocker-form-container">
+                            <div class="blocker-field">
+                                <label>Shield Activation</label>
+                                <div class="blocker-master-row">
+                                    <span>Enable Distraction Shield</span>
+                                    <label class="blocker-switch">
+                                        <input type="checkbox" id="blocker-master-toggle">
+                                        <span class="blocker-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="blocker-field">
+                                <label for="block-url-input">Website URL</label>
+                                <input type="text" id="block-url-input" placeholder="e.g. youtube.com, facebook.com" maxlength="100">
+                            </div>
+                            <div class="blocker-field">
+                                <label for="block-category-select">Category</label>
+                                <select id="block-category-select">
+                                    <option value="Social">Social Media</option>
+                                    <option value="Entertainment">Entertainment / Video</option>
+                                    <option value="Gaming">Gaming</option>
+                                    <option value="Other">Other Distractions</option>
+                                </select>
+                            </div>
+                            <button id="blocker-submit-btn" class="blocker-primary-btn">
+                                <i data-lucide="plus-circle"></i> Block Website
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: Blocklist -->
+                    <div class="blocker-list-section">
+                        <div class="blocker-list-header">
+                            <h3>Blacklisted Websites (<span id="blocker-count">0</span>)</h3>
+                        </div>
+                        
+                        <div id="blocker-sites-list" class="blocker-sites-list">
+                            <!-- Loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="music-view" class="view-panel">
+                <div class="workspace-wrapper centered-workspace">
+                    <div class="workspace-title-section">
+                        <h2>Focus Music</h2>
+                        <p>Lo-fi beats and ambient tracks to keep you in the zone.</p>
+                    </div>
+                    <div class="workspace-content" id="music-workspace-content">
+                        <!-- Relocated music card will go here -->
+                    </div>
+                </div>
+            </div>
+            <div id="settings-view" class="view-panel">
+                <div class="settings-grid">
+                    <!-- User Profile Settings Card -->
+                    <div class="grid-card settings-card col-span-1">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <i data-lucide="user" class="card-title-icon"></i>
+                                <h3>User Profile</h3>
+                            </div>
+                        </div>
+                        <div class="settings-container">
+                            <p class="settings-subtitle">Set your name to customize your greetings across the dashboard.</p>
+                            
+                            <div class="settings-field">
+                                <label for="settings-username">Profile Name</label>
+                                <input type="text" id="settings-username" placeholder="e.g. Alex" maxlength="20">
+                            </div>
+                            
+                            <div class="settings-actions">
+                                <button id="settings-save-profile-btn" class="settings-btn primary">
+                                    <i data-lucide="save"></i> Save Profile
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pomodoro Timer Presets Card -->
+                    <div class="grid-card settings-card col-span-1">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <i data-lucide="timer" class="card-title-icon"></i>
+                                <h3>Timer Presets</h3>
+                            </div>
+                        </div>
+                        <div class="settings-container">
+                            <p class="settings-subtitle">Customize the default durations (in minutes) for your focus and break sessions.</p>
+                            
+                            <div class="settings-form-row">
+                                <div class="settings-field">
+                                    <label for="settings-timer-work">Focus</label>
+                                    <input type="number" id="settings-timer-work" min="1" max="180" value="25">
+                                </div>
+                                <div class="settings-field">
+                                    <label for="settings-timer-short">Short Break</label>
+                                    <input type="number" id="settings-timer-short" min="1" max="60" value="5">
+                                </div>
+                                <div class="settings-field">
+                                    <label for="settings-timer-long">Long Break</label>
+                                    <input type="number" id="settings-timer-long" min="1" max="120" value="15">
+                                </div>
+                            </div>
+                            
+                            <div class="settings-actions">
+                                <button id="settings-save-presets-btn" class="settings-btn primary">
+                                    <i data-lucide="save"></i> Save Presets
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Credentials & Quote Limits Card -->
+                    <div class="grid-card settings-card col-span-2">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <i data-lucide="key" class="card-title-icon"></i>
+                                <h3>AI Credentials & Quote Limits</h3>
+                            </div>
+                        </div>
+                        <div class="settings-container">
+                            <p class="settings-subtitle">Configure your API credentials and quote limits to enable live AI-generated schedules, dynamic quotes, and intelligent goal breakdowns.</p>
+                            
+                            <div class="settings-field">
+                                <label for="settings-api-key">Google Gemini API Key</label>
+                                <div class="api-key-input-wrapper">
+                                    <input type="password" id="settings-api-key" placeholder="Enter your Gemini API key (e.g. AIzaSy...)" autocomplete="off">
+                                    <button id="api-key-toggle-visibility" class="api-visibility-btn" title="Toggle visibility">
+                                        <i data-lucide="eye"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="settings-help-box">
+                                    <span class="help-text">We connect directly to Google Gemini. Your key is stored locally on your device, keeping the app 100% free and private.</span>
+                                    <a href="https://aistudio.google.com/" target="_blank" class="help-link">
+                                        Get a free API Key from Google AI Studio <i data-lucide="external-link"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="settings-form-row" style="margin-top: 10px; align-items: flex-end;">
+                                <div class="settings-field" style="flex: 1;">
+                                    <label for="settings-quotes-limit">Max Daily AI Quote Refreshes</label>
+                                    <input type="number" id="settings-quotes-limit" min="1" max="50" value="5">
+                                </div>
+                                <div class="settings-field" style="flex: 1;">
+                                    <div class="settings-counter-display" style="display: flex; align-items: center; justify-content: space-between; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 8px 12px; border-radius: var(--radius-sm); height: 38px;">
+                                        <span style="font-size: 0.82rem; color: var(--text-secondary);">Refreshes Today: <strong id="settings-quotes-today-badge" style="color: var(--accent-purple); font-weight: 600;">0 / 5</strong></span>
+                                        <button id="settings-reset-quotes-counter-btn" class="settings-btn secondary" style="padding: 4px 10px; font-size: 0.72rem; border-radius: 4px; height: 26px; min-height: 0; line-height: 1;">
+                                            Reset
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Status Alert Banner -->
+                            <div id="api-key-status" class="api-status-banner hidden">
+                                <span id="api-status-text">Connection tested successfully!</span>
+                            </div>
+
+                            <div class="settings-actions">
+                                <button id="settings-test-key-btn" class="settings-btn secondary">
+                                    <i data-lucide="activity"></i> Test Connection
+                                </button>
+                                <button id="settings-save-key-btn" class="settings-btn primary">
+                                    <i data-lucide="save"></i> Save AI Settings
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Blocker Extension Companion Card -->
+                    <div class="grid-card settings-card col-span-2" style="margin-top: 25px;">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <i data-lucide="shield" class="card-title-icon"></i>
+                                <h3>Website Blocker Extension Companion</h3>
+                            </div>
+                        </div>
+                        <div class="settings-container">
+                            <p class="settings-subtitle">Want to block websites globally (e.g. YouTube, Facebook) in other tabs? Load our lightweight Chrome Extension companion in your browser.</p>
+                            
+                            <div class="settings-instructions-box" style="background: var(--bg-input); border: 1px solid var(--border-color); padding: 18px; border-radius: var(--radius-sm); margin-top: 15px;">
+                                <h4 style="margin-bottom: 10px; font-weight: 600; color: var(--text-primary); font-size: 0.9rem;">How to activate the real tab blocker:</h4>
+                                <ol style="padding-left: 20px; font-size: 0.85rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 8px; line-height: 1.4;">
+                                    <li>Navigate to <code>chrome://extensions</code> in your Google Chrome browser.</li>
+                                    <li>Enable <strong>Developer Mode</strong> using the toggle switch in the top-right corner of the extensions page.</li>
+                                    <li>Click the <strong>Load Unpacked</strong> button in the top-left corner.</li>
+                                    <li>Select the <code>focusflow-extension</code> folder located inside the project's root directory.</li>
+                                    <li>The extension will load and automatically block websites on your blacklist whenever the Distraction Shield is <strong>ON</strong>!</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reset App Data Card -->
+                    <div class="grid-card settings-card settings-reset-card col-span-2" style="margin-top: 25px; border-color: rgba(248,113,113,0.4);">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <i data-lucide="alert-triangle" class="card-title-icon" style="color: #f87171;"></i>
+                                <h3 style="color: #f87171;">Reset App Data</h3>
+                            </div>
+                        </div>
+                        <div class="settings-container">
+                            <p class="settings-subtitle">Permanently erase all app data: tasks, statistics, study plans, goals, habits, calendar events, and blocked sites. Music tracks and quotes remain. <strong>This cannot be undone.</strong></p>
+                            <div id="reset-confirm-row" style="display: none; align-items: center; gap: 12px; margin-top: 16px; padding: 14px 16px; background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.35); border-radius: var(--radius-sm);">
+                                <i data-lucide="alert-circle" style="color: #f87171; flex-shrink: 0;"></i>
+                                <span style="font-size: 0.85rem; color: var(--text-secondary);">Are you sure? All your progress will be lost forever.</span>
+                                <button id="reset-confirm-yes-btn" class="settings-btn danger" style="margin-left: auto; flex-shrink: 0;">
+                                    <i data-lucide="trash-2"></i> Yes, Reset Everything
+                                </button>
+                                <button id="reset-confirm-cancel-btn" class="settings-btn secondary" style="flex-shrink: 0;">
+                                    Cancel
+                                </button>
+                            </div>
+                            <div class="settings-actions" style="margin-top: 20px;">
+                                <button id="settings-reset-all-btn" class="settings-btn danger">
+                                    <i data-lucide="trash-2"></i> Reset All App Data
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Focus Intervention Overlay -->
+    <div id="blocker-overlay" class="blocker-overlay-screen hidden">
+        <div class="blocker-overlay-card">
+            <div class="blocker-overlay-icon-wrapper">
+                <i data-lucide="shield-off"></i>
+            </div>
+            <h2>Distraction Intercepted!</h2>
+            <p>You tried to visit <span id="blocker-intercepted-url" class="intercepted-url-text">youtube.com</span>, which is currently blocked by your FocusFlow settings.</p>
+            <blockquote class="blocker-quote">
+                "Focus is a muscle, and you build it by choosing work over distraction."
+            </blockquote>
+            <div class="blocker-overlay-actions">
+                <button id="blocker-close-overlay-btn" class="blocker-overlay-btn">
+                    Get Back to Work 🧠
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Premium Modal Dialog -->
+    <div id="custom-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-icon-wrapper">
+                <i id="modal-icon" data-lucide="coffee"></i>
+            </div>
+            <h3 id="modal-title">Session Complete</h3>
+            <p id="modal-message">Take a well-deserved break.</p>
+            <button id="modal-close-btn" class="modal-btn">Continue</button>
+        </div>
+    </div>
+
+    <!-- Custom Calendar Event Modal -->
+    <div id="calendar-event-modal" class="modal-overlay hidden">
+        <div class="modal-card calendar-modal-card">
+            <div class="modal-icon-wrapper" style="background: rgba(59, 130, 246, 0.1); color: var(--accent-blue);">
+                <i data-lucide="calendar-plus"></i>
+            </div>
+            <h3>Create Custom Event</h3>
+            <p class="modal-subtitle">Schedule a task, milestone, or reminder on <span id="modal-event-date-label">June 18, 2026</span></p>
+            
+            <div class="calendar-modal-form">
+                <div class="modal-form-field">
+                    <label for="event-title-input">Event Title</label>
+                    <input type="text" id="event-title-input" placeholder="e.g. Chemistry Lab Report submission" maxlength="60">
+                </div>
+                <div class="modal-form-row">
+                    <div class="modal-form-field">
+                        <label for="event-time-input">Time (Optional)</label>
+                        <input type="time" id="event-time-input">
+                    </div>
+                    <div class="modal-form-field">
+                        <label for="event-category-select">Category</label>
+                        <select id="event-category-select">
+                            <option value="study">Study Session</option>
+                            <option value="task">Task Deadline</option>
+                            <option value="meeting">Study Group / Meeting</option>
+                            <option value="personal">Personal / Break</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-form-field">
+                    <label for="event-desc-input">Description (Optional)</label>
+                    <textarea id="event-desc-input" placeholder="Add additional details or links..." rows="2" maxlength="150"></textarea>
+                </div>
+            </div>
+            
+            <div class="modal-actions" style="margin-top: 15px;">
+                <button id="calendar-modal-cancel-btn" class="modal-btn cancel-btn">Cancel</button>
+                <button id="calendar-modal-save-btn" class="modal-btn save-btn">Save Event</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Study Helper Modal (Active Recall & Quiz) -->
+    <div id="ai-helper-modal" class="modal hidden">
+        <div class="modal-card ai-helper-card">
+            <div class="ai-helper-header">
+                <div class="ai-helper-title-group">
+                    <i data-lucide="sparkles" class="helper-title-icon"></i>
+                    <h3 id="ai-helper-title">Study Helper</h3>
+                </div>
+                <button id="ai-helper-close-btn" class="ai-helper-close">&times;</button>
+            </div>
+            
+            <!-- Loading Indicator -->
+            <div id="ai-helper-loading" class="quiz-results-box hidden" style="padding: 40px 0;">
+                <div class="helper-spinner" style="width: 48px; height: 48px; border: 4px solid rgba(139,92,246,0.15); border-top-color: var(--accent-purple); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px;"></div>
+                <h3>Compiling Study Aids...</h3>
+                <p style="color: var(--text-secondary); margin-top: 8px;">FlowAI is generating cognitive-backed flashcards and customized practice questions.</p>
+            </div>
+            
+            <!-- Tab Navigation -->
+            <div class="ai-helper-tabs">
+                <button class="helper-tab-btn active" data-tab="flashcards">
+                    <i data-lucide="layers"></i> Flashcards
+                </button>
+                <button class="helper-tab-btn" data-tab="quiz">
+                    <i data-lucide="check-square"></i> Practice Quiz
+                </button>
+            </div>
+
+            <!-- Flashcards Tab Content -->
+            <div id="helper-tab-flashcards" class="helper-tab-content">
+                <div class="flashcard-deck-container">
+                    <div class="flashcard-card-wrapper">
+                        <div class="flashcard-card" id="flashcard-card">
+                            <div class="flashcard-face flashcard-front">
+                                <span class="flashcard-side-lbl">Question</span>
+                                <p id="flashcard-front-text">Question front text goes here...</p>
+                                <span class="flashcard-hint">Click card to reveal answer</span>
+                            </div>
+                            <div class="flashcard-face flashcard-back">
+                                <span class="flashcard-side-lbl">Answer</span>
+                                <p id="flashcard-back-text">Answer back text goes here...</p>
+                                <span class="flashcard-hint">Click card to show question</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flashcard-controls">
+                        <button id="flashcard-prev-btn" class="deck-btn"><i data-lucide="chevron-left"></i> Prev</button>
+                        <span id="flashcard-counter" class="deck-counter">1 / 3</span>
+                        <button id="flashcard-next-btn" class="deck-btn">Next <i data-lucide="chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Tab Content -->
+            <div id="helper-tab-quiz" class="helper-tab-content hidden">
+                <div class="quiz-container">
+                    <div class="quiz-progress-section">
+                        <div class="quiz-progress-stats">
+                            <span id="quiz-question-counter">Question 1 of 3</span>
+                            <span id="quiz-score-counter">Score: 0/0</span>
+                        </div>
+                        <div class="quiz-progress-track">
+                            <div id="quiz-progress-fill" style="width: 33%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question-box">
+                        <h4 id="quiz-question-text">Question text goes here...</h4>
+                    </div>
+
+                    <div class="quiz-options-list" id="quiz-options-list">
+                        <!-- Choices will be rendered dynamically -->
+                    </div>
+
+                    <div id="quiz-feedback-box" class="quiz-feedback-box hidden">
+                        <div class="feedback-status-group">
+                            <i id="feedback-icon" data-lucide="check-circle-2"></i>
+                            <span id="feedback-title">Correct!</span>
+                        </div>
+                        <p id="quiz-explanation-text">Explanation details...</p>
+                        <button id="quiz-next-btn" class="quiz-action-btn">Next Question</button>
+                    </div>
+
+                    <div id="quiz-results-box" class="quiz-results-box hidden">
+                        <i data-lucide="award" class="results-icon"></i>
+                        <h3>Quiz Complete!</h3>
+                        <p id="quiz-final-score">You scored 3 out of 3</p>
+                        <p id="quiz-results-feedback">Excellent job! You have fully mastered this study block.</p>
+                        <button id="quiz-restart-btn" class="quiz-action-btn">Restart Quiz</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <div id="assistant-card" class="hidden">
+        <div id="assistant-resize-handle" title="Drag to resize"></div>
+        <div class="assistant-header">
+            <h3><i data-lucide="bot"></i> FlowAI Assistant</h3>
+            <div class="assistant-actions">
+                <button id="clear-assistant-chat" title="Clear Chat History"><i data-lucide="trash-2"></i></button>
+                <button id="close-assistant" title="Close Assistant">&times;</button>
+            </div>
+        </div>
+        <div id="assistant-chat-messages">
+            <div class="chat-message assistant">
+                Hello! I am **FlowAI**, your study concierge. 🧠 How can I help you optimize your study space today?
+            </div>
+            <div class="chat-message assistant">
+                You can ask me to **start a timer**, **create a task**, **block a site**, or **toggle light/dark mode**!
+            </div>
+        </div>
+        <div class="assistant-input-area">
+            <input type="text" id="assistant-input" placeholder="Ask FlowAI to do something..." autocomplete="off">
+            <button id="assistant-send-btn">Send</button>
+        </div>
+    </div>
+
+    <!-- Widgets JS Scripts -->
+    <script src="js/timer.js"></script>
+    <script src="js/tasks.js"></script>
+    <script src="js/stats.js"></script>
+    <script src="js/music.js"></script>
+    <script src="js/plan.js"></script>
+    <script src="js/quotes.js"></script>
+    <script src="js/habits.js"></script>
+    <script src="js/goals.js"></script>
+    <script src="js/blocker.js"></script>
+    <script src="js/calendar.js"></script>
+    
+    <!-- Main JS Application Controller -->
+    <script src="js/app.js"></script>
+    <script src="js/assistant.js"></script>
+</body>
+</html>

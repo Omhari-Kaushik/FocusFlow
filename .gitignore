@@ -1,0 +1,11 @@
+# Local backups
+rollback_backup_phase4/
+focusflow-extension-backup/
+
+# Archives
+*.zip
+
+# System & temporary logs
+*.log
+.DS_Store
+Thumbs.db

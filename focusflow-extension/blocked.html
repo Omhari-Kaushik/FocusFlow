@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distraction Intercepted – FocusFlow</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0d0d1a;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #e2e8f0;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(139,92,246,0.35);
+            border-radius: 20px;
+            padding: 48px 52px;
+            max-width: 520px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(139,92,246,0.12);
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .shield-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(236,72,153,0.2));
+            border: 2px solid rgba(139,92,246,0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 32px;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .blocked-url {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 20px;
+            word-break: break-all;
+        }
+
+        .blocked-url span {
+            color: #f87171;
+            font-weight: 600;
+        }
+
+        blockquote {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            font-style: italic;
+            border-left: 3px solid rgba(139,92,246,0.5);
+            padding: 10px 16px;
+            text-align: left;
+            margin: 20px 0 28px;
+            border-radius: 0 8px 8px 0;
+            background: rgba(139,92,246,0.06);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            box-shadow: 0 4px 15px rgba(139,92,246,0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139,92,246,0.5);
+        }
+
+        .tagline {
+            font-size: 0.78rem;
+            color: #4a5568;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="shield-icon">🛡️</div>
+        <h1>Distraction Intercepted!</h1>
+        <p class="blocked-url">
+            You tried to visit <span id="blocked-site">this site</span>,
+            which is blocked by your FocusFlow Distraction Shield.
+        </p>
+        <blockquote>
+            "Focus is a muscle — every distraction you resist makes it stronger."
+        </blockquote>
+        <a href="http://127.0.0.1:5500/#website-blocker" class="btn" id="back-btn">
+            🧠 Get Back to Work
+        </a>
+        <p class="tagline">FocusFlow Distraction Shield • Stay on track</p>
+    </div>
+
+    <script src="blocked.js"></script>
+</body>
+</html>
