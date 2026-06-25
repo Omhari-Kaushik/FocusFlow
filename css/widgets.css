@@ -5485,7 +5485,7 @@ body.light-theme .ai-item-action-btn:hover {
 
 /* AI Helper Modal Card */
 .ai-helper-card {
-    width: 700px !important;
+    width: 540px !important;
     max-width: 90% !important;
     max-height: 90vh !important;
     display: flex !important;
@@ -5504,7 +5504,7 @@ body.light-theme .ai-helper-card {
 
 .ai-helper-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 20px;
     width: 100% !important;
