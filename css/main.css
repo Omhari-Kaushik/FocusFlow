@@ -657,6 +657,12 @@ body.light-theme .grid-card:hover {
     transition: opacity var(--transition-normal);
 }
 
+@media (min-width: 901px) {
+    .modal-overlay {
+        padding-left: 260px;
+    }
+}
+
 body.light-theme .modal-overlay {
     background-color: rgba(15, 23, 42, 0.4);
 }
