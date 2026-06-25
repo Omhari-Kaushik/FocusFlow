@@ -17,18 +17,7 @@ FocusFlow is an interactive, browser-based productivity dashboard and personal c
 
 ---
 
-## 📸 Screenshots
 
-### 🖥️ Workspace Dashboard
-![FocusFlow Dashboard](screenshots/dashboard.png)
-
-### 🧠 AI Study Planner & Timeline
-![AI Study Planner](screenshots/planner.png)
-
-### 🃏 AI Study Helper (Active Recall Flashcards & Quizzes)
-![AI Study Helper](screenshots/helper_modal.png)
-
----
 
 ## 🧠 FlowAI: Agent Architecture & Core Concepts
 
@@ -74,13 +63,36 @@ FlowAI is equipped with a schema mapping containing **14 separate custom functio
 ## 🌟 Core Features
 
 1.  **AI Capsule Trigger & Chat** – Relocated to the top-right header actions. It is styled as a sleek, outlines-matched capsule button with a sparkles icon that glows with the signature purple-pink gradient when active.
+    
+    ![AI Capsule Trigger & Chat](screenshots/capsule.png)
+
 2.  **Circular Pomodoro Timer** – Pomodoro, Short Break, and Long Break configurations with a circular progress ring, chime alerts, and visual bounce notifications.
+    
+    ![Circular Pomodoro Timer](screenshots/timer.png)
+
 3.  **Daily & Weekly Analytics** – Rolling session counters, focus summaries, and a custom SVG weekly bar chart with animated height updates.
+    
+    ![Daily & Weekly Analytics](screenshots/analytics.png)
+
 4.  **AI Study Plan Generator** – Builds structured, hour-by-hour schedules based on cognitive science (alternating focus and rest blocks) with simulated loader status updates.
+    
+    ![AI Study Plan Generator](screenshots/planner.png)
+
 5.  **Focus Music Player** – Pre-packaged local lo-fi tracks, volume sliders, and a spinning vinyl record art piece with realistic motion markers and light sheen reflections.
+    
+    ![Focus Music Player](screenshots/music.png)
+
 6.  **Goal & Habit Trackers** – Milestone check-ins, habit streak calendars, and auto-recalculated completion indicators.
+    
+    ![Goal & Habit Trackers](screenshots/habits.png)
+
 7.  **Workspace Calendar** – Aggregates and overlays goal deadlines, study plans, and custom schedule events.
+    
+    ![Workspace Calendar](screenshots/calendar.png)
+
 8.  **Distraction Shield (Chrome Extension)** – Companion Manifest V3 extension that intercepts distracting domains globally and redirects you back to your workspace.
+    
+    ![Distraction Shield (Chrome Extension)](screenshots/blocker.png)
 
 ---
 
