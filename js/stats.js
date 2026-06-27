@@ -129,7 +129,21 @@
         // Read values directly from database
         const initTime = parseInt(localStorage.getItem('focusflow-total-time') || (isResetClean ? '0' : '75'));
         const initSessions = parseInt(localStorage.getItem('focusflow-sessions-count') || (isResetClean ? '0' : '3'));
-        const initStreak = parseInt(localStorage.getItem('focusflow-streak') || (isResetClean ? '0' : '7'));
+        let initStreak = parseInt(localStorage.getItem('focusflow-streak') || (isResetClean ? '0' : '7'));
+        
+        // Auto-validate and reset daily streak if last session date is older than yesterday
+        const lastLoggedDate = localStorage.getItem('focusflow-last-date') || '';
+        if (lastLoggedDate !== '') {
+            const today = new Date().toDateString();
+            const yesterdayDate = new Date();
+            yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+            const yesterday = yesterdayDate.toDateString();
+            
+            if (lastLoggedDate !== today && lastLoggedDate !== yesterday) {
+                initStreak = 0;
+                localStorage.setItem('focusflow-streak', '0');
+            }
+        }
         
         // Count tasks from LocalStorage list
         let initTasks = 0;
@@ -154,7 +168,7 @@
         if (sessionsEl) sessionsEl.textContent = initSessions.toString();
         if (streakEl) streakEl.textContent = initStreak.toString();
         if (tasksEl) tasksEl.textContent = initTasks.toString();
-        if (sidebarStreakEl) sidebarStreakEl.textContent = `${initStreak} Days`;
+        if (sidebarStreakEl) sidebarStreakEl.textContent = initStreak === 1 ? '1 Day' : `${initStreak} Days`;
     }
 
     /**
@@ -187,7 +201,7 @@
         if (streakEl) animateCount(streakEl, prevStreak, newStreak);
         
         // Update sidebar streak text immediately
-        if (sidebarStreakEl) sidebarStreakEl.textContent = `${newStreak} Days`;
+        if (sidebarStreakEl) sidebarStreakEl.textContent = newStreak === 1 ? '1 Day' : `${newStreak} Days`;
 
         // Update chart data - add minutes to today's bar
         const todayDayIndex = new Date().getDay(); // 0 is Sun, 1 is Mon...

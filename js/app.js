@@ -370,7 +370,7 @@ function initDatabase() {
         'focusflow-total-time': '0',
         'focusflow-sessions-count': '0',
         'focusflow-streak': '0',
-        'focusflow-last-date': new Date().toDateString(),
+        'focusflow-last-date': '',
         'focusflow-weekly-data': JSON.stringify({
             'this-week': {
                 days: [0, 0, 0, 0, 0, 0, 0],

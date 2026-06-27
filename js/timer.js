@@ -471,7 +471,11 @@
 
         // Streak check
         if (lastLoggedDate !== today) {
-            if (lastLoggedDate === new Date(Date.now() - 86400000).toDateString()) {
+            const yesterdayDate = new Date();
+            yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+            const yesterday = yesterdayDate.toDateString();
+
+            if (lastLoggedDate === yesterday) {
                 // Logged yesterday -> streak increments
                 streak++;
             } else if (lastLoggedDate === '') {
