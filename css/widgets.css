@@ -2553,7 +2553,7 @@ body.light-theme .goal-deadline-countdown {
 }
 
 .goal-subtask-checkbox.checked {
-    background: var(--gradient-primary);
+    background: var(--accent-green);
     border-color: transparent;
     color: #ffffff;
 }
@@ -2758,7 +2758,7 @@ body.light-theme .habit-summary-item {
 }
 
 .habit-summary-checkbox.checked {
-    background: var(--gradient-primary);
+    background: var(--accent-green);
     border-color: transparent;
     color: #ffffff;
 }
