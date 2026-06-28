@@ -2694,9 +2694,22 @@ body.dark-theme input[type="date"]::-webkit-calendar-picker-indicator:hover {
     flex-direction: column;
     gap: 10px;
     list-style: none;
-    max-height: 220px;
+    max-height: 140px;
     overflow-y: auto;
-    padding-right: 4px;
+    padding-right: 6px;
+}
+
+.habits-summary-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.habits-summary-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.habits-summary-list::-webkit-scrollbar-thumb {
+    background: var(--border-color-hover);
+    border-radius: var(--radius-full);
 }
 
 .habit-summary-item {
