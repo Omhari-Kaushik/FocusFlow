@@ -1988,6 +1988,22 @@ body.light-theme .goals-summary-stats {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    max-height: 100px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.goals-summary-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.goals-summary-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.goals-summary-list::-webkit-scrollbar-thumb {
+    background: var(--border-color-hover);
+    border-radius: var(--radius-full);
 }
 
 .goals-summary-item {

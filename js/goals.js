@@ -583,7 +583,7 @@
 
         // Render top 2 active goals
         dbListContainer.innerHTML = '';
-        const activeGoals = goals.filter(g => !g.completed).slice(0, 2);
+        const activeGoals = goals.filter(g => !g.completed);
 
         if (activeGoals.length === 0) {
             dbListContainer.innerHTML = `
