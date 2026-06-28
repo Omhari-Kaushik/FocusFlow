@@ -5124,6 +5124,36 @@ body.light-theme #analytics-view .analytics-trend-row {
     border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
+/* Coach Header & Icon alignment */
+.analytics-coach-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.analytics-coach-header span {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.coach-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--accent-purple);
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.analytics-coach-tip {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+
 /* Make smart coach look like a premium feature card */
 #analytics-view .analytics-coach-box {
     background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(236, 72, 153, 0.05));
