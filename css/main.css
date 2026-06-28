@@ -523,6 +523,86 @@ body.light-theme .grid-card:hover {
     box-shadow: 0 12px 30px 0 rgba(148, 163, 184, 0.18);
 }
 
+/* Card Header, Title Group, and Icon styles */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.card-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-title-group h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.card-title-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--accent-purple); /* Premium purple accent by default */
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Custom coloring for specific icons to look extremely premium */
+.card-title-group i[data-lucide="user"],
+.card-title-group svg[data-lucide="user"] {
+    color: var(--accent-purple);
+}
+
+.card-title-group i[data-lucide="timer"],
+.card-title-group svg[data-lucide="timer"] {
+    color: var(--accent-blue);
+}
+
+.card-title-group i[data-lucide="key"],
+.card-title-group svg[data-lucide="key"] {
+    color: var(--accent-purple);
+}
+
+.card-title-group i[data-lucide="shield"],
+.card-title-group svg[data-lucide="shield"] {
+    color: var(--accent-pink);
+}
+
+.card-title-group i[data-lucide="alert-triangle"],
+.card-title-group svg[data-lucide="alert-triangle"] {
+    color: #f87171;
+}
+
+/* Code and Strong tag theme styles inside cards */
+.grid-card code {
+    background: var(--bg-input);
+    padding: 3px 6px;
+    border-radius: var(--radius-sm);
+    font-family: monospace;
+    font-size: 0.82rem;
+    color: var(--accent-purple);
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+}
+
+body.light-theme .grid-card code {
+    color: #8b5cf6; /* Keep text purple in light theme */
+    background: rgba(139, 92, 246, 0.05);
+}
+
+.grid-card strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
 /* Loading Placeholder Styles */
 .card-header-placeholder {
     display: flex;
