@@ -375,6 +375,9 @@
     function renderSelectedDayEvents(dateStr) {
         if (!selectedEventsList || !selectedDayLabel) return;
 
+        // Render upcoming events list
+        renderUpcomingEvents();
+
         // Format selected date string nicely: Thursday, June 18, 2026
         const parts = dateStr.split('-');
         const dObj = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
@@ -610,5 +613,109 @@
             "'": '&#039;'
         };
         return text.replace(/[&<>"']/g, function (m) { return map[m]; });
+    }
+
+    /**
+     * Gather and render all upcoming events chronologically.
+     */
+    function renderUpcomingEvents() {
+        const upcomingContainer = document.getElementById('upcoming-events-list');
+        if (!upcomingContainer) return;
+        upcomingContainer.innerHTML = '';
+
+        // Combine all events: goalEvents, planEvents, customEvents
+        const allEvents = [];
+        
+        goalEvents.forEach(g => {
+            allEvents.push({
+                title: g.title,
+                date: g.date,
+                category: 'goal',
+                completed: g.completed
+            });
+        });
+
+        planEvents.forEach(p => {
+            allEvents.push({
+                title: p.title,
+                date: p.date,
+                category: 'plan'
+            });
+        });
+
+        customEvents.forEach(c => {
+            allEvents.push({
+                title: c.title,
+                date: c.date,
+                category: c.category,
+                time: c.time,
+                desc: c.desc
+            });
+        });
+
+        // Filter: only show today's and future events
+        const todayStr = new Date().toISOString().split('T')[0];
+        const futureEvents = allEvents.filter(e => e.date >= todayStr);
+
+        // Sort by date (ascending) and then by time if available
+        futureEvents.sort((a, b) => {
+            if (a.date !== b.date) {
+                return a.date.localeCompare(b.date);
+            }
+            const timeA = a.time || "00:00";
+            const timeB = b.time || "00:00";
+            return timeA.localeCompare(timeB);
+        });
+
+        if (futureEvents.length === 0) {
+            upcomingContainer.innerHTML = `
+                <div style="font-size: 0.75rem; text-align: center; color: var(--text-muted); padding: 20px 0;">
+                    No upcoming events.
+                </div>
+            `;
+            return;
+        }
+
+        futureEvents.forEach(event => {
+            const item = document.createElement('div');
+            item.className = 'upcoming-event-item';
+
+            // Format date for display: e.g., "Jun 28"
+            let formattedDate = event.date;
+            try {
+                const parts = event.date.split('-');
+                const d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+                formattedDate = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            } catch (err) {}
+
+            let badgeClass = 'custom-study';
+            let badgeLabel = event.category;
+            if (event.category === 'goal') {
+                badgeClass = 'goal';
+                badgeLabel = 'Goal';
+            } else if (event.category === 'plan') {
+                badgeClass = 'plan';
+                badgeLabel = 'Study Plan';
+            } else {
+                badgeClass = `custom-${event.category}`;
+            }
+
+            item.innerHTML = `
+                <div class="upcoming-event-left">
+                    <span class="upcoming-event-title" title="${escapeHtml(event.title)}">${escapeHtml(event.title)}</span>
+                    <div class="upcoming-event-meta">
+                        <span class="upcoming-event-badge ${badgeClass}">${badgeLabel}</span>
+                        ${event.time ? `<span><i data-lucide="clock" style="width: 10px; height: 10px; display: inline; margin-top:-2px;"></i> ${event.time}</span>` : ''}
+                    </div>
+                </div>
+                <span class="upcoming-event-date">${formattedDate}</span>
+            `;
+
+            upcomingContainer.appendChild(item);
+        });
+
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
     }
 })();

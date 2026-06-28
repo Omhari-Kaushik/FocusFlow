@@ -5991,4 +5991,125 @@ body.light-theme .quiz-option-btn:hover:not(:disabled) {
     margin-bottom: 16px;
 }
 
+/* ==========================================================================
+   Upcoming Events Sidebar Card Styles
+   ========================================================================== */
+.calendar-upcoming-card {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.upcoming-events-container {
+    width: 100%;
+}
+
+.upcoming-events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 185px; /* Perfect height for scrollability */
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+/* Slim scrollbar styling matching premium widgets */
+.upcoming-events-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.upcoming-events-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.upcoming-events-list::-webkit-scrollbar-thumb {
+    background: var(--border-color-hover);
+    border-radius: var(--radius-full);
+}
+
+.upcoming-event-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.78rem;
+    transition: all var(--transition-fast);
+}
+
+body.light-theme .upcoming-event-item {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.upcoming-event-item:hover {
+    background: var(--border-color);
+    border-color: var(--border-color-hover);
+}
+
+.upcoming-event-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.upcoming-event-title {
+    font-weight: 550;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.upcoming-event-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.upcoming-event-date {
+    font-weight: 600;
+    color: var(--accent-purple);
+    font-size: 0.78rem;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+
+.upcoming-event-badge {
+    padding: 1px 6px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+}
+
+.upcoming-event-badge.goal {
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--accent-purple);
+}
+
+.upcoming-event-badge.plan {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent-blue);
+}
+
+.upcoming-event-badge.custom-task {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--accent-green);
+}
+
+.upcoming-event-badge.custom-meeting {
+    background: rgba(236, 72, 153, 0.1);
+    color: var(--accent-pink);
+}
+
+.upcoming-event-badge.custom-study {
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--accent-purple);
+}
+
 

@@ -12,8 +12,8 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- GSAP for animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <link rel="stylesheet" href="css/main.css?v=2.6">
-    <link rel="stylesheet" href="css/widgets.css?v=2.6">
+    <link rel="stylesheet" href="css/main.css?v=2.7">
+    <link rel="stylesheet" href="css/widgets.css?v=2.7">
 </head>
 <body class="dark-theme">
     <div class="app-container">
@@ -884,33 +884,50 @@
             </div>
             <div id="calendar-view" class="view-panel">
                 <div class="calendar-layout">
-                    <!-- Left Panel: Selected Day Details & Legend -->
-                    <div class="calendar-sidebar grid-card">
-                        <div class="card-header">
-                            <div class="card-title-group">
-                                <i data-lucide="calendar-days" class="card-title-icon"></i>
-                                <h3 id="selected-day-label">Selected Day</h3>
+                    <div class="calendar-sidebar">
+                        <!-- Card 1: Selected Day Details & Legend -->
+                        <div class="grid-card calendar-details-card" style="display: flex; flex-direction: column; gap: 20px;">
+                            <div class="card-header" style="margin-bottom: 0;">
+                                <div class="card-title-group">
+                                    <i data-lucide="calendar-days" class="card-title-icon"></i>
+                                    <h3 id="selected-day-label">Selected Day</h3>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <!-- Events List for Selected Day -->
-                        <div class="selected-day-events-container">
-                            <div id="selected-day-events-list" class="calendar-events-list">
-                                <!-- Loaded dynamically -->
+                            
+                            <!-- Events List for Selected Day -->
+                            <div class="selected-day-events-container">
+                                <div id="selected-day-events-list" class="calendar-events-list">
+                                    <!-- Loaded dynamically -->
+                                </div>
+                                <button id="calendar-add-event-btn" class="calendar-primary-btn">
+                                    <i data-lucide="plus-circle"></i> Add Custom Event
+                                </button>
                             </div>
-                            <button id="calendar-add-event-btn" class="calendar-primary-btn">
-                                <i data-lucide="plus-circle"></i> Add Custom Event
-                            </button>
+
+                            <!-- Calendar Legend -->
+                            <div class="calendar-legend-card" style="margin-top: 5px;">
+                                <h4>Activity Legend</h4>
+                                <ul class="calendar-legend-list">
+                                    <li><span class="legend-dot goal-dot"></span> Goal Deadlines</li>
+                                    <li><span class="legend-dot plan-dot"></span> AI Study Plans</li>
+                                    <li><span class="legend-dot custom-dot"></span> Custom Reminders</li>
+                                </ul>
+                            </div>
                         </div>
 
-                        <!-- Calendar Legend -->
-                        <div class="calendar-legend-card">
-                            <h4>Activity Legend</h4>
-                            <ul class="calendar-legend-list">
-                                <li><span class="legend-dot goal-dot"></span> Goal Deadlines</li>
-                                <li><span class="legend-dot plan-dot"></span> AI Study Plans</li>
-                                <li><span class="legend-dot custom-dot"></span> Custom Reminders</li>
-                            </ul>
+                        <!-- Card 2: Upcoming Events -->
+                        <div class="grid-card calendar-upcoming-card">
+                            <div class="card-header" style="margin-bottom: 12px;">
+                                <div class="card-title-group">
+                                    <i data-lucide="calendar" class="card-title-icon" style="color: var(--accent-purple);"></i>
+                                    <h3>Upcoming Events</h3>
+                                </div>
+                            </div>
+                            <div class="upcoming-events-container">
+                                <div id="upcoming-events-list" class="upcoming-events-list">
+                                    <!-- Loaded dynamically -->
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -1376,19 +1393,19 @@
     </div>
 
     <!-- Widgets JS Scripts -->
-    <script src="js/timer.js?v=2.6"></script>
-    <script src="js/tasks.js?v=2.6"></script>
-    <script src="js/stats.js?v=2.6"></script>
-    <script src="js/music.js?v=2.6"></script>
-    <script src="js/plan.js?v=2.6"></script>
-    <script src="js/quotes.js?v=2.6"></script>
-    <script src="js/habits.js?v=2.6"></script>
-    <script src="js/goals.js?v=2.6"></script>
-    <script src="js/blocker.js?v=2.6"></script>
-    <script src="js/calendar.js?v=2.6"></script>
+    <script src="js/timer.js?v=2.7"></script>
+    <script src="js/tasks.js?v=2.7"></script>
+    <script src="js/stats.js?v=2.7"></script>
+    <script src="js/music.js?v=2.7"></script>
+    <script src="js/plan.js?v=2.7"></script>
+    <script src="js/quotes.js?v=2.7"></script>
+    <script src="js/habits.js?v=2.7"></script>
+    <script src="js/goals.js?v=2.7"></script>
+    <script src="js/blocker.js?v=2.7"></script>
+    <script src="js/calendar.js?v=2.7"></script>
     
     <!-- Main JS Application Controller -->
-    <script src="js/app.js?v=2.6"></script>
-    <script src="js/assistant.js?v=2.6"></script>
+    <script src="js/app.js?v=2.7"></script>
+    <script src="js/assistant.js?v=2.7"></script>
 </body>
 </html>
