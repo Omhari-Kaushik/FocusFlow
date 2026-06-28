@@ -324,6 +324,12 @@
             return;
         }
 
+        // Auto-add any typed milestone text in the input box that wasn't added with the '+' button yet
+        if (milestoneInput && milestoneInput.value.trim()) {
+            tempMilestones.push(milestoneInput.value.trim());
+            milestoneInput.value = '';
+        }
+
         // Assemble sub-tasks checklist
         const subtasks = tempMilestones.map((text, idx) => ({
             id: Date.now() + idx + Math.random(),
