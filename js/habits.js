@@ -172,6 +172,14 @@
                 }
             }
         });
+
+        // Dashboard manage button redirect
+        if (dbManageBtn) {
+            dbManageBtn.addEventListener('click', () => {
+                const navItem = document.querySelector('.sidebar-nav .nav-item[data-view="habit-tracker"]');
+                if (navItem) navItem.click();
+            });
+        }
     }
 
     /**
